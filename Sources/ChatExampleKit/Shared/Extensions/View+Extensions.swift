@@ -44,9 +44,9 @@ internal extension View {
     
     /// iOS 16+ toolbar visibility with fallback
     @ViewBuilder
-    func toolbarVisibilityCompat(_ visibility: Visibility, for placement: ToolbarPlacement) -> some View {
+    func toolbarVisibilityCompat(_ visibility: Visibility, for placement: Any) -> some View {
         if #available(iOS 16.0, *) {
-            self.toolbar(visibility, for: placement)
+            self.toolbar(visibility, for: placement as! ToolbarPlacement)
         } else {
             // iOS 15 fallback: no effect since toolbar visibility control not available
             self

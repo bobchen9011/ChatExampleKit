@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+#if canImport(UIKit)
+import UIKit
+#endif
 
 // MARK: - App Color Theme
 internal struct AppTheme {
@@ -21,11 +24,13 @@ internal struct AppTheme {
     static let secondaryText = Color(red: 0x2F/255, green: 0x4F/255, blue: 0x4F/255) // #2F4F4F 深灰綠色次要文字
     static let hintText = Color(red: 0x4A/255, green: 0x4A/255, blue: 0x4A/255) // #4A4A4A 中等灰色提示文字
     
+#if canImport(UIKit)
     // MARK: - UIKit 顏色 (用於外觀設定)
     static let uiPrimaryGreen = UIColor(red: 0x32/255, green: 0xCD/255, blue: 0x32/255, alpha: 1.0)
     static let uiBackgroundGreen = UIColor(red: 0xCC/255, green: 0xE8/255, blue: 0xCF/255, alpha: 1.0)
     static let uiPrimaryText = UIColor(red: 0x1A/255, green: 0x1A/255, blue: 0x1A/255, alpha: 1.0)
     static let uiHintText = UIColor(red: 0x4A/255, green: 0x4A/255, blue: 0x4A/255, alpha: 1.0)
+#endif
     
     // MARK: - 特殊顏色
     static let white = Color.white

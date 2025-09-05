@@ -44,11 +44,6 @@ internal class AuthViewModel: ObservableObject {
             self.isLoading = false
             return
         }
-#else
-        self.errorMessage = "UIKit 不可用"
-        self.isLoading = false
-        return
-#endif
         
         guard let clientID = FirebaseApp.app()?.options.clientID else {
             self.errorMessage = "Firebase 配置錯誤"
@@ -91,6 +86,10 @@ internal class AuthViewModel: ObservableObject {
                 }
             }
         }
+#else
+        self.errorMessage = "UIKit 不可用，無法執行 Google 登入"
+        self.isLoading = false
+#endif
     }
     
     // MARK: - Create User in Firestore
