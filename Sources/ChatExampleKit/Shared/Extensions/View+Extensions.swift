@@ -79,11 +79,16 @@ internal extension View {
     /// Helper function to get tabBar placement for toolbar
     @ViewBuilder
     func toolbarTabBarCompat(_ visibility: Visibility) -> some View {
+#if os(iOS)
         if #available(iOS 16.0, *) {
             self.toolbar(visibility, for: .tabBar)
         } else {
             self
         }
+#else
+        // macOS and other platforms don't have tabBar placement
+        self
+#endif
     }
 }
 

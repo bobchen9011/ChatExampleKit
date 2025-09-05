@@ -199,7 +199,7 @@ internal struct ChatListRowView: View {
                     Spacer()
                     
                     // 顯示已讀取狀態（只有當最後訊息是自己發送時才顯示）
-                    if let lastMessage = chatRoom.lastMessage,
+                    if let _ = chatRoom.lastMessage,
                        let currentUserId = authViewModel.currentUser?.id,
                        let lastMessageSenderId = chatRoom.lastMessageSenderId,
                        lastMessageSenderId == currentUserId {

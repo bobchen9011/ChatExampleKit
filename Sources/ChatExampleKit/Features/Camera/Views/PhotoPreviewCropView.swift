@@ -153,6 +153,23 @@ internal struct FullScreenPhotoView: View {
     @State private var lastOffset: CGSize = .zero
     @State private var showOriginalSize = false
     
+    // Cross-platform screen dimensions
+    private var screenWidth: CGFloat {
+#if canImport(UIKit)
+        return UIScreen.main.bounds.width
+#else
+        return 400
+#endif
+    }
+    
+    private var screenHeight: CGFloat {
+#if canImport(UIKit)
+        return UIScreen.main.bounds.height
+#else
+        return 600
+#endif
+    }
+    
     var body: some View {
         ZStack {
             Color.black.ignoresSafeArea()
