@@ -25,6 +25,7 @@ internal class ChatManager: ObservableObject {
     
     private var authViewModel: AuthViewModel?
     private var isInitialized = false
+    private var cancellables = Set<AnyCancellable>()
     
     private init() {
         // 私有初始化確保單例
@@ -115,18 +116,3 @@ internal class ChatManager: ObservableObject {
     }
 }
 
-// MARK: - Combine Support
-import Combine
-
-extension ChatManager {
-    private var cancellables: Set<AnyCancellable> {
-        get {
-            return _cancellables
-        }
-        set {
-            _cancellables = newValue
-        }
-    }
-    
-    private var _cancellables = Set<AnyCancellable>()
-}
