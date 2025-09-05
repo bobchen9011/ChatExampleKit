@@ -47,7 +47,7 @@ Color.appBackgroundGreen
                         .listRowBackground(Color.appCardGreen)
                     }
                     .listStyle(PlainListStyle())
-                    .scrollContentBackground(.hidden)
+                    .scrollContentBackgroundCompat(.hidden)
                 }
                 }
             }

@@ -59,7 +59,7 @@ internal struct MessageListView: View {
                 }
             }
             .listStyle(InsetGroupedListStyle())
-            .scrollContentBackground(.hidden)
+            .scrollContentBackgroundCompat(.hidden)
         }
     }
     

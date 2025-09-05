@@ -109,7 +109,7 @@ internal struct HomeView: View {
                                 .listRowBackground(Color.clear)
                         }
                         .listStyle(PlainListStyle())
-                        .scrollContentBackground(.hidden)
+                        .scrollContentBackgroundCompat(.hidden)
                         .padding(.top, 16)
                     }
                 }
@@ -212,7 +212,7 @@ internal struct ProfileView: View {
                         .listRowBackground(Color.appCardGreen)
                     }
                 }
-                .scrollContentBackground(.hidden)
+                .scrollContentBackgroundCompat(.hidden)
                 .listRowSeparator(.hidden)
             }
             .navigationTitle("個人資料")
