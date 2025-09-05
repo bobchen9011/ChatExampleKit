@@ -1,0 +1,43 @@
+# Xcode
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/*.xcworkspace
+!*.xcodeproj/xcshareddata
+*.xcworkspace/xcuserdata
+*.xcworkspace/contents.xcworkspacedata
+
+# Swift Package Manager
+.build/
+.swiftpm/
+*.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/
+Package.resolved
+
+# iOS
+*.app
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# macOS
+.DS_Store
+
+# User-specific files
+xcuserdata/
+
+# IDE files
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# Firebase
+GoogleService-Info.plist
+
+# Sensitive configuration
+*config.json
+*secrets.plist
