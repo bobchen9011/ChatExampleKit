@@ -53,6 +53,33 @@ internal extension View {
             self
         }
     }
+    
+    /// iOS 16+ TextField axis with fallback
+    @ViewBuilder
+    static func textFieldCompat(_ placeholder: String, text: Binding<String>, axis: Axis = .horizontal) -> some View {
+        if #available(iOS 16.0, *) {
+            TextField(placeholder, text: text, axis: axis)
+        } else {
+            // iOS 15 fallback: regular TextField
+            TextField(placeholder, text: text)
+        }
+    }
+}
+
+// MARK: - ToolbarPlacement Helpers
+internal struct ToolbarPlacementTabBar {
+    // Empty struct that can be used as a placeholder
+}
+
+internal extension View {
+    /// Helper function to get tabBar placement for toolbar
+    func toolbarTabBarCompat(_ visibility: Visibility) -> some View {
+        if #available(iOS 16.0, *) {
+            return AnyView(self.toolbar(visibility, for: .tabBar))
+        } else {
+            return AnyView(self)
+        }
+    }
 }
 
 // MARK: - iOS 16+ Toolbar Visibility Modifier

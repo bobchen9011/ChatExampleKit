@@ -133,7 +133,7 @@ internal struct MessageInputView: View {
     
     // MARK: - 文字輸入框
     private var textInputField: some View {
-        TextField("輸入訊息...", text: $inputText, axis: .vertical)
+        View.textFieldCompat("輸入訊息...", text: $inputText, axis: .vertical)
             .textFieldStyle(PlainTextFieldStyle())
             .focused($isTextFieldFocused)
             .padding(.horizontal, 16)
