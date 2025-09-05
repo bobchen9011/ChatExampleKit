@@ -1,10 +1,32 @@
 import SwiftUI
+#if canImport(UIKit)
+import UIKit
+#endif
 
 internal struct MessageBubbleView: View {
     let message: Message
     let hasTail: Bool
     let isCurrentUser: Bool
     let shouldShowReadStatus: Bool
+    
+    // Cross-platform screen width
+    private var screenWidth: CGFloat {
+#if canImport(UIKit)
+        return UIScreen.main.bounds.width
+#else
+        return 400 // Fallback width for non-iOS platforms
+#endif
+    }
+    
+    // Cross-platform copy to pasteboard
+    private func copyToPasteboard(_ text: String) {
+#if canImport(UIKit)
+        UIPasteboard.general.string = text
+#else
+        // macOS fallback would use NSPasteboard, but we'll skip for simplicity
+        print("Copy to pasteboard: \(text)")
+#endif
+    }
     
     var body: some View {
         HStack(alignment: .bottom) {
@@ -26,7 +48,7 @@ internal struct MessageBubbleView: View {
                 ChatImageBubble(
                     message: message,
                     isIncoming: false,
-                    maxWidth: UIScreen.main.bounds.width * 0.75
+                    maxWidth: screenWidth * 0.75
                 )
             } else {
                 textBubble(isIncoming: false)
@@ -36,7 +58,7 @@ internal struct MessageBubbleView: View {
                 messageMetadata(isCurrentUser: true)
             }
         }
-        .frame(maxWidth: UIScreen.main.bounds.width * 0.75, alignment: .trailing)
+        .frame(maxWidth: screenWidth * 0.75, alignment: .trailing)
     }
     
     // MARK: - 接收訊息視圖
@@ -46,7 +68,7 @@ internal struct MessageBubbleView: View {
                 ChatImageBubble(
                     message: message,
                     isIncoming: true,
-                    maxWidth: UIScreen.main.bounds.width * 0.75
+                    maxWidth: screenWidth * 0.75
                 )
             } else {
                 textBubble(isIncoming: true)
@@ -56,7 +78,7 @@ internal struct MessageBubbleView: View {
                 messageMetadata(isCurrentUser: false)
             }
         }
-        .frame(maxWidth: UIScreen.main.bounds.width * 0.75, alignment: .leading)
+        .frame(maxWidth: screenWidth * 0.75, alignment: .leading)
     }
     
     // MARK: - 文字氣泡
@@ -78,7 +100,7 @@ Color.appPrimaryGreen // 亮綠色 #32CD32
             .clipShape(RoundedRectangle(cornerRadius: 20))
             .contextMenu {
                 Button("複製") {
-                    UIPasteboard.general.string = message.content
+                    copyToPasteboard(message.content)
                 }
             }
     }

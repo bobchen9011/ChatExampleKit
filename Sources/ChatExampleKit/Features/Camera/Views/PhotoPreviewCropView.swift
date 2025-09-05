@@ -1,10 +1,32 @@
 import SwiftUI
+#if canImport(Photos)
 import Photos
+#endif
+#if canImport(UIKit)
+import UIKit
+#endif
 
 internal struct PhotoPreviewCropView: View {
     let asset: PHAsset
     @Binding var isPresented: Bool
     let onImageSelected: (UIImage) -> Void
+    
+    // Cross-platform screen dimensions
+    private var screenWidth: CGFloat {
+#if canImport(UIKit)
+        return UIScreen.main.bounds.width
+#else
+        return 400
+#endif
+    }
+    
+    private var screenHeight: CGFloat {
+#if canImport(UIKit)
+        return UIScreen.main.bounds.height
+#else
+        return 600
+#endif
+    }
     
     @State private var originalImage: UIImage?
     @State private var showFullScreen = false
@@ -67,7 +89,7 @@ internal struct PhotoPreviewCropView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
-        .frame(maxHeight: UIScreen.main.bounds.height * 0.6)
+        .frame(maxHeight: screenHeight * 0.6)
         .background(Color.black)
     }
     
@@ -144,7 +166,7 @@ internal struct FullScreenPhotoView: View {
                         Image(uiImage: image)
                             .resizable()
                             .aspectRatio(contentMode: .fill)
-                            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                            .frame(width: screenWidth, height: screenHeight)
                             .clipped()
                     }
                     .onTapGesture {

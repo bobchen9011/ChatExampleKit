@@ -1,7 +1,11 @@
 import SwiftUI
 import Combine
+#if canImport(UIKit)
+import UIKit
+#endif
 
 // 鍵盤高度監聽
+#if canImport(UIKit)
 internal class KeyboardResponder: ObservableObject {
     @Published var keyboardHeight: CGFloat = 0
     @Published var isKeyboardVisible: Bool = false
@@ -29,6 +33,13 @@ internal class KeyboardResponder: ObservableObject {
             .store(in: &cancellableSet)
     }
 }
+#else
+// Fallback KeyboardResponder for non-iOS platforms
+internal class KeyboardResponder: ObservableObject {
+    @Published var keyboardHeight: CGFloat = 0
+    @Published var isKeyboardVisible: Bool = false
+}
+#endif
 
 internal struct ChatRoomView: View {
     let chatId: String
