@@ -1,6 +1,9 @@
 import SwiftUI
+#if canImport(Photos)
 import Photos
+#endif
 
+#if canImport(Photos) && canImport(UIKit)
 internal struct CustomPhotoPickerView: View {
     @Binding var isPresented: Bool
     let onImagesSelected: ([UIImage]) -> Void
@@ -163,17 +166,17 @@ internal struct PhotoThumbnailView: View {
     }
 }
 
-internal struct PhotoAsyncImage: View {
+internal struct PhotoAsyncImage<Content: View>: View {
     let asset: PHAsset
     let targetSize: CGSize
-    let content: (UIImage) -> AnyView
+    let content: (UIImage) -> Content
     
     @State private var image: UIImage?
     
-    init(asset: PHAsset, targetSize: CGSize, @ViewBuilder content: @escaping (UIImage) -> some View) {
+    init(asset: PHAsset, targetSize: CGSize, @ViewBuilder content: @escaping (UIImage) -> Content) {
         self.asset = asset
         self.targetSize = targetSize
-        self.content = { AnyView(content($0)) }
+        self.content = content
     }
     
     var body: some View {
@@ -298,4 +301,5 @@ internal class PhotoPickerViewModel: ObservableObject {
     }
     .padding()
 }
+#endif
 

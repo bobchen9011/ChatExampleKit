@@ -54,9 +54,13 @@ internal extension View {
         }
     }
     
+}
+
+// MARK: - TextField Compatibility Helper
+internal struct TextFieldCompat {
     /// iOS 16+ TextField axis with fallback
     @ViewBuilder
-    static func textFieldCompat(_ placeholder: String, text: Binding<String>, axis: Axis = .horizontal) -> some View {
+    static func create(_ placeholder: String, text: Binding<String>, axis: Axis = .horizontal) -> some View {
         if #available(iOS 16.0, *) {
             TextField(placeholder, text: text, axis: axis)
         } else {
@@ -73,11 +77,12 @@ internal struct ToolbarPlacementTabBar {
 
 internal extension View {
     /// Helper function to get tabBar placement for toolbar
+    @ViewBuilder
     func toolbarTabBarCompat(_ visibility: Visibility) -> some View {
         if #available(iOS 16.0, *) {
-            return AnyView(self.toolbar(visibility, for: .tabBar))
+            self.toolbar(visibility, for: .tabBar)
         } else {
-            return AnyView(self)
+            self
         }
     }
 }
