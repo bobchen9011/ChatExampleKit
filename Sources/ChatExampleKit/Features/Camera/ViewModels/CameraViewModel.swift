@@ -1,6 +1,8 @@
 import Foundation
 import SwiftUI
+#if canImport(AVFoundation)
 import AVFoundation
+#endif
 
 // MARK: - 相機 ViewModel
 @MainActor

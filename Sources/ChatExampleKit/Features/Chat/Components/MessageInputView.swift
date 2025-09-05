@@ -142,7 +142,7 @@ internal struct MessageInputView: View {
                 RoundedRectangle(cornerRadius: 20)
                     .fill(Color.appLightCardGreen)
             )
-            .lineLimit(1...5)
+            .lineLimitCompat(1...5)
             .onTapGesture {
                 if showPhotoButtons {
                     withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {

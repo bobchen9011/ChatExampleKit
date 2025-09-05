@@ -1,7 +1,10 @@
 import SwiftUI
+#if canImport(AVFoundation)
 import AVFoundation
+#endif
 
 // MARK: - 相機預覽組件
+#if canImport(AVFoundation) && canImport(UIKit)
 internal struct CameraPreviewComponent: UIViewRepresentable {
     let viewModel: CameraViewModel
     
@@ -28,6 +31,7 @@ internal struct CameraPreviewComponent: UIViewRepresentable {
         }
     }
 }
+#endif
 
 #Preview {
     VStack {

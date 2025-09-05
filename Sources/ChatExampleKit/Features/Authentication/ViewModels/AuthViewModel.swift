@@ -3,6 +3,9 @@ import Firebase
 import FirebaseAuth
 import GoogleSignIn
 import FirebaseFirestore
+#if canImport(UIKit)
+import UIKit
+#endif
 
 internal class AuthViewModel: ObservableObject {
     @Published var currentUser: User? = nil
@@ -35,11 +38,17 @@ internal class AuthViewModel: ObservableObject {
         isLoading = true
         errorMessage = ""
         
+#if canImport(UIKit)
         guard let presentingViewController = UIApplication.shared.windows.first?.rootViewController else {
             self.errorMessage = "無法找到根視圖控制器"
             self.isLoading = false
             return
         }
+#else
+        self.errorMessage = "UIKit 不可用"
+        self.isLoading = false
+        return
+#endif
         
         guard let clientID = FirebaseApp.app()?.options.clientID else {
             self.errorMessage = "Firebase 配置錯誤"

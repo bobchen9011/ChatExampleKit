@@ -1,7 +1,9 @@
 import Foundation
 import FirebaseFirestore
 import FirebaseAuth
+#if canImport(UIKit)
 import UIKit
+#endif
 
 internal class MessageViewModel: ObservableObject {
     @Published var chatRooms: [ChatRoom] = []

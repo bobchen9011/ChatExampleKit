@@ -160,7 +160,7 @@ internal struct ChatRoomView: View {
         .navigationBarTitleDisplayMode(.inline)
         .background(Color.appBackgroundGreen)
         .ignoresSafeArea(.keyboard, edges: .bottom)
-        .toolbar(showTabBar ? .visible : .hidden, for: .tabBar)
+        .toolbarVisibilityCompat(showTabBar ? .visible : .hidden, for: .tabBar)
         .onAppear {
             DispatchQueue.main.async {
                 showTabBar = false

@@ -1,6 +1,8 @@
 import Foundation
 import AVFoundation
+#if canImport(UIKit)
 import UIKit
+#endif
 
 // MARK: - 相機管理器
 internal class CameraManager: NSObject, ObservableObject {

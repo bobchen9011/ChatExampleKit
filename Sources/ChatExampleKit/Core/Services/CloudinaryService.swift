@@ -136,6 +136,7 @@ internal class CloudinaryService {
         }.resume()
     }
     
+#if canImport(UIKit)
     /// 壓縮圖片
     /// - Parameters:
     ///   - image: 原始圖片
@@ -155,6 +156,7 @@ internal class CloudinaryService {
         print("📦 圖片壓縮完成 - 原始大小: \(image.size), 壓縮率: \(compression), 文件大小: \((imageData?.count ?? 0) / 1024)KB")
         return imageData
     }
+#endif
 }
 
 // MARK: - Cloudinary 錯誤類型
